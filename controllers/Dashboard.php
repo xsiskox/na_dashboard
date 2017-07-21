@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller {
 		$this->load->helper('wpusers');
 		$this->load->library('na_cv');
 		
+		
 	}
 	public function index()
 	{
