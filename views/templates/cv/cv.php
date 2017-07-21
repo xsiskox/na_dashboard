@@ -6,21 +6,23 @@ foreach($sezioni as $sez)
 {
 	$section=$my_cv[$sez];
 	switch($sez)
-		{
-			case $this->na_cv::IP:
-				echo 'informazioni';
-				$meta_key_array=array_flip($this->na_cv->get_metakey_ip());
-				break;
-			case $this->na_cv::CP:
-				$meta_key_array=array_flip($this->na_cv->get_metakey_cp());
-				break;
-			case $this->na_cv::EP:
-				$meta_key_array=array_flip($this->na_cv->get_metakey_ep());
-				break;
-			case $this->na_cv::IFO:
-				$meta_key_array=array_flip($this->na_cv->get_metakey_if());
-				break;
-		}
+	{
+		case $this->na_cv::IP:
+			echo 'informazioni';
+			$meta_key_array=array_flip($this->na_cv->get_metakey_ip());
+			break;
+		case $this->na_cv::CP:
+			$meta_key_array=array_flip($this->na_cv->get_metakey_cp());
+			break;
+		case $this->na_cv::EP:
+			$meta_key_array=array_flip($this->na_cv->get_metakey_ep());
+			break;
+		case $this->na_cv::IFO:
+			$meta_key_array=array_flip($this->na_cv->get_metakey_if());
+			break;
+	}
+	echo '<div class="row"><div clas="col-md-3"><span class="label label-violet">{$sez}</span></div>';
+	echo '<div class="col-md-9">';
 	echo'<div class="portlet box portlet-green"><div class="portlet-header"><div class="caption">'.$sez.'</div>
 				<div class="actions"><a href="#" class="btn btn-sm btn-white"><i class="fa fa-edit"></i>&nbsp;
         Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-white"><i class="fa fa-user"></i>&nbsp;
@@ -33,7 +35,7 @@ foreach($sezioni as $sez)
 								<span class="text-warning mts help-block-right">Help block on the right</span></div></div>';
 					
 				}
-				echo '</div></form><div id="cv_update" name="submitForm" class="btn btn-success btn-lg btn-block">Fatto</div></div></div>';
+				echo '</form><div id="cv_update" name="submitForm" class="btn btn-success btn-lg btn-block">Fatto</div></div></div></div></div>';
 				
 
 }
