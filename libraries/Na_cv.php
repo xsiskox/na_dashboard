@@ -18,6 +18,7 @@ class Na_cv  //classe per gestire il curriculum vitae
 	const PREFIX_CP='cp';
 	const PREFIX_PR='pr';
 	const PREFIX_EP='ep';
+	const PREFIX_oo='jj';
 	private static $CV_ID=0;
 	//************************** metakey utilizzate nel db************************************
 	//meta_key sezione informazioni personali
