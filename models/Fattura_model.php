@@ -18,7 +18,8 @@ class Fattura_model extends CI_Model
 		define('TABLE_FATTURE_CLIENTE','na_fattura_cliente');
 		define('COL_FATTURA_NUMERO','fattura_numero');
 		define ('COL_FATTURA_DATA','fattura_data');
-		define('COL_CLIENTE','cliente_nome');
+		define('COL_F_CLIENTE_NOME','cliente_nome');
+		define('COL_F_CLIENTE_ID','cliente_id');
 		define('COL_FATTURA_PAGATO','pagato');
 		define('COL_USER_ID','user_id');
 		//****************** TABLE na_dettaglio_fattura ********
@@ -59,18 +60,19 @@ class Fattura_model extends CI_Model
 	public function get_fatture_list($user,$anno,$cliente,$pagato)
 	{
 		$anno=($anno>0 && $anno!='tutti')?' and year('.COL_FATTURA_DATA.')='.$anno:"";
-		$cliente=($cliente=='tutti')?"":" and ".COL_CLIENTE."='".$cliente."'";
-		switch($pagato)
-		{
-			case 'si':
-				$pagato=" and ".COL_FATTURA_PAGATO."=1";
-				break;
-			case 'no':
-				$pagato=" and ".COL_FATTURA_PAGATO."=0";
-				break;
-			default:
-				$pagato="";
-		}
+		$cliente=($cliente=='tutti')?"":" and ".COL_F_CLIENTE_ID."=".$cliente;
+		$pagato=($pagato!='tutti')?" and ".COL_FATTURA_PAGATO."={$pagato}":'';
+		//switch($pagato)
+		//{
+		//	case 'si':
+		//		$pagato=" and ".COL_FATTURA_PAGATO."=1";
+		//		break;
+		//	case 'no':
+		//		$pagato=" and ".COL_FATTURA_PAGATO."=0";
+		//		break;
+		//	default:
+		//		$pagato="";
+		//}
 		$query="select * from ".TABLE_FATTURE_CLIENTE." where ".COL_USER_ID."=".$user.$anno.$cliente.$pagato." order by ".COL_FATTURA_NUMERO;
 		$sql=$this->db->query($query);
 		$result=$sql->result_array();

@@ -42,13 +42,15 @@ class Dashboard extends CI_Controller {
 	public function elenco_fatture()
 	{
 		
-		if(is_user_logged_in()){$this->load_view('','');}
+		if(is_user_logged_in()){$this->load_view('','','tutti','tutti');}
 		else{redirect('/wp-login.php');}
 	}
 	public function refresh_view()
 	{
 		$year=$this->input->post('anno');
-		$this->load_view('refresh',$year);
+		$customer=$this->input->post('cliente');
+		$status=$this->input->post('status');
+		$this->load_view('refresh',$year,$customer,$status);
 	}
 	public function home()
 	{
@@ -77,7 +79,7 @@ class Dashboard extends CI_Controller {
 			redirect('/wp-login.php');
 		}
 	}
-	private function load_view($mess,$anno)
+	private function load_view($mess,$anno,$cust,$stat)
 	{
 		
 		$user=wp_get_current_user();
@@ -85,8 +87,8 @@ class Dashboard extends CI_Controller {
 		{
 			$this->load->model('Fattura_model','model');
 			//$anno="tutti";
-			$cliente="tutti";
-			$pagato="";
+			$cliente=$cust;
+			$pagato=$stat;
 			$data['list']=$this->model->get_fatture_list($user->ID,$anno,$cliente,$pagato);
 			switch($mess)
 			{
@@ -96,6 +98,7 @@ class Dashboard extends CI_Controller {
 				default:
 					$data['user']=$user;
 					$data['anni_list']=$this->model->get_anni_list($user->ID);
+					$data['clienti_list']=$this->model->elenco_clienti($user->ID);
 					echo $this->load->view('templates/fatture/list_fatture',$data,true);
 					break;
 	
