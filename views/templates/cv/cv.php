@@ -21,7 +21,7 @@ foreach($sezioni as $sez)
 			$meta_key_array=array_flip($this->na_cv->get_metakey_if());
 			break;
 	}
-	echo '<div class="row"><div clas="col-md-3"><span class="label label-violet">{$sez}</span></div>';
+	
 	echo '<div class="col-md-9">';
 	echo'<div class="portlet box portlet-green"><div class="portlet-header"><div class="caption">'.$sez.'</div>
 				<div class="actions"><a href="#" class="btn btn-sm btn-white"><i class="fa fa-edit"></i>&nbsp;
@@ -35,7 +35,7 @@ foreach($sezioni as $sez)
 								<span class="text-warning mts help-block-right">Help block on the right</span></div></div>';
 					
 				}
-				echo '</form><div id="cv_update" name="submitForm" class="btn btn-success btn-lg btn-block">Fatto</div></div></div></div></div>';
+				echo '</form><div id="cv_update" name="submitForm" class="btn btn-success btn-lg btn-block">Fatto</div></div></div></div>';
 				
 
 }
