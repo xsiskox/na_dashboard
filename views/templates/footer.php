@@ -11,6 +11,8 @@
 <!---------------------- text  here -------------------------->
     <!-- Custom Theme JavaScript -->
     <script src="assets/dist/js/sb-admin-2.js"></script>
+	<!---------------------- pdf library -------------------------->
+	<script src="assets/dist/js/jspdf.min.js"></script>
 		<!---------------------- price format library -------------------------->
 		<script src="assets/dist/js/jquery.priceformat.min.js"></script>
 		<!---------------------- my functions javasript file -------------------------->

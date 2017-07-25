@@ -68,16 +68,28 @@ class Dashboard extends CI_Controller {
 		
 		if(is_user_logged_in())
 		{
-			$user=wp_get_current_user();
+			
 			$id=$this->input->post('fattura');
-			$this->load->model('Fattura_model','model');
-			$data['list']=$this->model->get_dettagli_fattura($user->ID,$id);
+			$data=$this->dettaglio_fattura($id,'');
 			echo $this->load->view('templates/fatture/dettagli',$data,true);
 		}
 		else
 		{
 			redirect('/wp-login.php');
 		}
+	}
+	public function dettaglio_fattura($id_fattura,$mess)
+	{
+			$user=wp_get_current_user();
+			$this->load->model('Fattura_model','model');
+			$data['list']=$this->model->get_dettagli_fattura($user->ID,$id_fattura);
+			if ($mess=="pdf"){
+				echo json_encode($data);
+			}
+			else
+			{
+				return $data;
+			}
 	}
 	private function load_view($mess,$anno,$cust,$stat)
 	{

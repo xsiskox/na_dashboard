@@ -29,7 +29,7 @@ foreach($list as $row)
 	echo'<td style="width:5em">'.number_format($row['irpef'],2,',','.').'</td>';
 	echo'<td style="width:5em">'.number_format($row['enpapi'],2,',','.').'</td>';
 	echo'<td><span class="label '.$labelStatus.'">'.$labelPagamento.'</span></td>';
-	echo'<td><button title="scarica questa fattura" onclick="buttonPrint(event,'.$index.')" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>'.
+	echo'<td><button title="scarica questa fattura" onclick="btnInvoiceDownload(event,'.$index.')" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>'.
 	'<button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></button></td>';
 	echo'</tr>';
 	$index++;
