@@ -13,24 +13,24 @@ class Na_cv  //classe per gestire il curriculum vitae
 	const UI='ulteriori informazioni';
 	const AL='allegati';
 	const LI='lingue';
-	
+	//********************************prefix dei nome delle metakey**************************
 	const PREFIX_IP='ip';
 	const PREFIX_CP='cp';
 	const PREFIX_PR='pr';
 	const PREFIX_EP='ep';
 	
-	private static $CV_ID=0;
+	
 	//************************** metakey utilizzate nel db************************************
 	//meta_key sezione informazioni personali
-	private $meta_key_ip=['ip_name'=>'nome','ip_address'=>'indirizzo','ip_tel'=>'telefono','ip_mail'=>'mail','ip_www'=>'www'];
+	private $meta_key_ip=[self::PREFIX_IP.'_name'=>'nome',self::PREFIX_IP.'_address'=>'_indirizzo',self::PREFIX_IP.'_tel'=>'telefono',self::PREFIX_IP.'_mail'=>'mail',self::PREFIX_IP.'_www'=>'www'];
 	//meta_key sezione capacita personali
-	private $meta_key_cp=['cp_c_comunicative'=>'capacita comunicativa','cp_c_org'=>'capacita organizzative','cp_c_professionali'=>'competenze professionali',
-													'cp_c_digit'=>'competenze digitali','cp_altro'=>'altre competenze','cp_patente'=>'patente guida'];
+	private $meta_key_cp=[self::PREFIX_CP.'_c_comunicative'=>'capacita comunicativa',self::PREFIX_CP.'_c_org'=>'capacita organizzative',self::PREFIX_CP.'_c_professionali'=>'competenze professionali',
+													self::PREFIX_CP.'_c_digit'=>'competenze digitali',self::PREFIX_CP.'_altro'=>'altre competenze',self::PREFIX_CP.'_patente'=>'patente guida'];
 	
 	//meta_key sezione istruzione e formazione
-	private $meta_key_if=['if_data_range'=>'data','if_titolo'=>'titolo','if_sede'=>'sede','if_competenze'=>'competenze aquisite'];
+	private $meta_key_if=[self::PREFIX_CP.'_data_range'=>'data',self::PREFIX_CP.'_titolo'=>'titolo',self::PREFIX_CP.'_sede'=>'sede',self::PREFIX_CP.'_competenze'=>'competenze aquisite'];
 	//meta_key sezione esperienza professionale
-	private $meta_key_ep=['ep_data_range'=>'data','ep_occupazione'=>'occupazione','ep_sede'=>'sede','ep_ruolo'=>'ruolo'];
+	private $meta_key_ep=[self::PREFIX_CP.'_data_range'=>'data',self::PREFIX_CP.'_occupazione'=>'occupazione',self::PREFIX_CP.'_sede'=>'sede',self::PREFIX_CP.'_ruolo'=>'ruolo'];
 	//************************** array sezioni cv ************************************
   private $sections=array();//sezioni del cv
 	public $informazioni_personali=array(); //sezione informazioni personali
@@ -76,11 +76,11 @@ class Na_cv  //classe per gestire il curriculum vitae
 	
 	public function get_cv_id()
 	{
-		return self::$CV_ID;
+		
 	}
 	public function set_cv_id($id)
 	{
-		self::$CV_ID=$id;
+		
 	}
 	public function get_sections()
 	{
