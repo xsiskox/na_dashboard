@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-define('MK_MAIL','email');
-define('MK_PHONE','phone');
-define('MK_INFO','info');
-define('MK_ADDRESS','address');
+
 /**
  * My sidebar di navigazione(dashboard)  Helpers
  *
