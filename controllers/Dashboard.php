@@ -10,9 +10,10 @@ class Dashboard extends CI_Controller {
 		$this->load->helper('sidebarmenuitems');
 		$this->load->helper('wpusers');
 		$this->load->library('na_cv');
-		
+	
 		
 	}
+
 	public function index()
 	{
 		if(is_user_logged_in())
@@ -70,7 +71,7 @@ class Dashboard extends CI_Controller {
 		{
 			
 			$id=$this->input->post('fattura');
-			$data=$this->dettaglio_fattura($id,'');
+			$data=$this->dettaglio_fattura($id);
 			echo $this->load->view('templates/fatture/dettagli',$data,true);
 		}
 		else
@@ -78,18 +79,31 @@ class Dashboard extends CI_Controller {
 			redirect('/wp-login.php');
 		}
 	}
-	public function dettaglio_fattura($id_fattura,$mess)
+	public function set_invoice_pdf($id_fattura)
+	{
+		//load dati fattura (data, numero,irpef%,...)
+		$this->load->model('Fattura_model','model');
+		$data['data']=$this->model->get_fattura_data($id_fattura);
+		//load dettagli fattura
+		$data['dettaglio']=$this->model->get_dettagli_fattura($id_fattura);
+		//load dati cliente todo: add code to load customer data
+		$id_cliente=$data['data'][0]['cliente_id'];
+		$data['cliente']=$this->model->get_cliente($id_cliente);
+		echo json_encode($data);
+
+	}
+	/**
+	 * @param $id_fattura
+	 * @param $mess
+	 * @return mixed
+	 */
+	private function dettaglio_fattura($id_fattura)
 	{
 			$user=wp_get_current_user();
 			$this->load->model('Fattura_model','model');
-			$data['list']=$this->model->get_dettagli_fattura($user->ID,$id_fattura);
-			if ($mess=="pdf"){
-				echo json_encode($data);
-			}
-			else
-			{
-				return $data;
-			}
+			$data['list']=$this->model->get_dettagli_fattura($id_fattura);
+			return $data;
+
 	}
 	private function load_view($mess,$anno,$cust,$stat)
 	{
@@ -151,7 +165,11 @@ class Dashboard extends CI_Controller {
 			redirect('/wp-login.php');
 		}
 	}
-	public function add_fattura()
+
+    /**
+     *
+     */
+    public function add_fattura()
 	{
 		
 		if(is_user_logged_in())
@@ -185,7 +203,7 @@ class Dashboard extends CI_Controller {
 			$this->model->insert_data($fattura,$dettaglio_fattura);
 			//$view['myHTML']= $this->load->view('templates/fatture/nuova_fattura','',true);
 			
-			//$this->load->view('dashboard_view');
+			//$this->load->view('dashboard_view');TODO: remove this line
 			echo "ok";
 		}
 		else
@@ -251,5 +269,7 @@ class Dashboard extends CI_Controller {
 		
 		
 	}
+
+
 }
 ?>

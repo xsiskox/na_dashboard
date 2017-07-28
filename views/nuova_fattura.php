@@ -104,7 +104,7 @@
 											<td></td>
 											<td></td>
 											<td><output name='totaleDettagli' class='input-box-number form-control' id='totaleFattura'></output></td>
-										</tr </tbody>
+										</tr ></tbody>
 								</table>
 							</div>
 									<!-- /.table-responsive -->

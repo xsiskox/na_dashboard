@@ -22,6 +22,7 @@ class Fattura_model extends CI_Model
 		define('COL_F_CLIENTE_ID','cliente_id');
 		define('COL_FATTURA_PAGATO','pagato');
 		define('COL_USER_ID','user_id');
+		define('COL_FATTURA_VIEW_ID','fattura_id');
 		//****************** TABLE na_dettaglio_fattura ********
 		define('TABLE_DETTAGLIO_FATTURA','na_dettaglio_fattura');
 		define('COL_FATTURE_FATTURA_ID','fattura_id');
@@ -31,6 +32,7 @@ class Fattura_model extends CI_Model
 		define('COL_FATTURE_QUANTITA','quantita');
 		//****************** TABLE na_fatture ****************
 		define('TABLE_FATTURE','na_fatture');
+		define('COL_FATTURA_ID','id');
 		define('COL_FATTURA_CLIENTE','cliente_id');
 		define('COL_FATTURA_IRPEF','fattura_irpef');
 		define('COL_FATTURA_ENPAPI','fattura_enpapi');
@@ -84,10 +86,23 @@ class Fattura_model extends CI_Model
 		$sql=$this->db->query($query);
 		return $sql->result_array();
 	}
-	public function get_dettagli_fattura($user,$id)
+	public function get_fattura_data($fattura_id)
 	{
-		$query="select * from ".TABLE_DETTAGLIO_FATTURA." where ".COL_FATTURE_FATTURA_ID."=".$id;
+		$query="select * from ".TABLE_FATTURE_CLIENTE." where ".COL_FATTURA_VIEW_ID."={$fattura_id}";
 		$sql=$this->db->query($query);
+		return $sql->result_array();
+	}
+
+	public function get_dettagli_fattura($id)
+	{
+		$query = "select * from " . TABLE_DETTAGLIO_FATTURA . " where " . COL_FATTURE_FATTURA_ID . "=" . $id;
+		$sql = $this->db->query($query);
+		return $sql->result_array();
+	}
+	public function get_cliente($id)
+	{
+		$query = "select * from " . TABLE_CLIENTI . " where " . COL_CLIENTE_ID . "=" . $id;
+		$sql = $this->db->query($query);
 		return $sql->result_array();
 	}
 	public function numero_fattura($user)
