@@ -26,13 +26,13 @@ if ( ! function_exists('menu_items'))
 					['title'=>'Fatture','method'=>'','ddm'=>1,'parent'=>'','icon'=>'fa-table','order'=>2],
 					['title'=>'Curriculum','method'=>'view_cv','ddm'=>0,'parent'=>'','icon'=>'fa-university','order'=>3],
 					['title'=>'Dashboard','method'=>'home','ddm'=>0,'parent'=>'','icon'=>'fa-dashboard','order'=>1],
-					['title'=>'ECM','method'=>'index','ddm'=>0,'parent'=>'','icon'=>'fa-graduation-cap','order'=>4],
+					['title'=>'ECM','method'=>'home','ddm'=>0,'parent'=>'','icon'=>'fa-graduation-cap','order'=>4],
 					['title'=>'Clienti','method'=>'','ddm'=>1,'parent'=>'','icon'=>'fa-users','order'=>5],
 					['title'=>'Elenco Clienti','method'=>'elenco_clienti','ddm'=>0,'parent'=>'Clienti','icon'=>'fa-list','order'=>2],
 					['title'=>'Nuovo Cliente','method'=>'nuovo_cliente','ddm'=>0,'parent'=>'Clienti','icon'=>'fa-plus-square-o','order'=>1],
-					['title'=>'Video Corsi','method'=>'','ddm'=>0,'parent'=>'','icon'=>'fa-play','order'=>6],
-					['title'=>'Profilo','method'=>'','ddm'=>0,'parent'=>'','icon'=>'fa-user','order'=>7],
-					['title'=>'Settings','method'=>'','ddm'=>0,'parent'=>'','icon'=>'fa-wrench','order'=>8]];
+					['title'=>'Video Corsi','method'=>'home','ddm'=>0,'parent'=>'','icon'=>'fa-play','order'=>6],
+					['title'=>'Profilo','method'=>'home','ddm'=>0,'parent'=>'','icon'=>'fa-user','order'=>7],
+					['title'=>'Settings','method'=>'home','ddm'=>0,'parent'=>'','icon'=>'fa-wrench','order'=>8]];
 		/*-- sort the data with order ascendig--*/
 		foreach ($menu as $key => $row)
 		{

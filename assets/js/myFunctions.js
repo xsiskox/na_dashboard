@@ -1,12 +1,13 @@
 
-function closePopup(e)
+function closePopup()
 {/*-- chiude la finestra dettagli fattura nella vista elenco fatture --*/
 	
 	$('#slide').slideUp('fast');
 	$('#popup-form').fadeOut();
 }
-function showTableDettagli(table)
-{/*-- mostra la finestra pop-up dettagli fattura --*/
+
+
+function showTableDettagli(table) {/*-- mostra la finestra pop-up dettagli fattura --*/
 	var index = table.rowIndex;
 	var tableRow = document.getElementById("elencoFatture").rows[index];
 	var id = tableRow.cells[0].innerHTML;
@@ -21,15 +22,13 @@ function showTableDettagli(table)
 	panelHeading.html("N.: " + tableRow.cells[1].innerHTML + "<div>cliente: " + tableRow.cells[2].innerHTML + "</div><div>data: " + tableRow.cells[3].innerHTML + "</div>");
 	$.ajax(
 		{
-			type:'post',
-			url:url,
-			data:
-			{
-				"fattura":id
+			type: 'post',
+			url: url,
+			data: {
+				"fattura": id
 			},
-			success:function(data)
-			{
-				var element=$('#dettaglioFattura');
+			success: function (data) {
+				var element = $('#dettaglioFattura');
 				element.find('tbody').html(data);
 				slide.slideDown('fast');
 			}
@@ -268,14 +267,14 @@ function deleteRow(index)
 	showTotale();
 	checkFieldForm();
 }
-function parseNumber()
+/*function parseNumber()
 {
 	parseFloat($(this).val()).toFixed(2);
-}
+}*/
 function invoicePDF(fattura)
 {
+	var num;
 	var doc = new jsPDF("p", "mm", "a4");
-
 	var fontSize = 10;
 	var startX = 30;
 	var startY = 10;
@@ -334,17 +333,22 @@ function invoicePDF(fattura)
 	x = startX;
 	doc.text(x, y, prestazione);
 	y += offset * 2;
-	doc.text(x, y, imponibile + fattura.data[0].lordo.toFixed(2));
+	num=Number(fattura.data[0].lordo);
+	doc.text(x, y, imponibile +num.toFixed(2));
 	y += offset;
-	doc.text(x, y, irpef + fattura.data[0].irpef.toFixed(2));
+	num=Number(fattura.data[0].irpef);
+	doc.text(x, y, irpef +num.toFixed(2));
 	y += offset;
-	doc.text(x, y, enpapi + fattura.data[0].enpapi.toFixed(2));
+	num=Number(fattura.data[0].enpapi);
+	doc.text(x, y, enpapi + num.toFixed(2));
 	y += offset;
-	doc.text(x, y, netto + fattura.netto.toFixed(2));
+	num=Number(fattura.netto);
+	doc.text(x, y, netto + num.toFixed(2));
 	
 	//stampa label iva se >0
 	if (fattura.iva>0){y += offset;doc.text(x, y, iva + fattura.iva.toFixed(2));}
-	y += offset;
+	y += offset
+	fattura.pagare=0;
 	doc.text(x, y, pagare + fattura.pagare.toFixed(2));
 	y = footerY;
 	doc.line(x, y, x + 100, y);
@@ -353,11 +357,12 @@ function invoicePDF(fattura)
 	doc.text(x, y, "footer");
 	y += offset;
 	doc.setFontStyle("normal");
-	doc.text(x, y, "(1)");
+	doc.text(x, y, "(1)"+footerText);
 	doc.save("hello js.pdf");
 }
 function btnInvoiceDownload(e,index)
 	{
+		//todo: calcolare i campi lordo
 		var tableRow = document.getElementById("elencoFatture").rows[index];
 		var id = tableRow.cells[0].innerHTML;
 		e.stopPropagation();
@@ -384,7 +389,7 @@ function btnInvoiceDownload(e,index)
 $(document).ready(function()
 {/*-- nav bar action --*/
 	var url = "?/dashboard/sidebar_items/";
-	var menu_items;
+	var menuItems;
 	
 	$.ajax(
 	{
@@ -396,22 +401,22 @@ $(document).ready(function()
 		},
 		success: function(data)
 		{
-			menu_items=JSON.parse(data);
+			menuItems=JSON.parse(data);
 			
 		}
 	});
 	$(document).on("click", "[name='menuButton']", function()
 	{
 		console.log($(this));
-		var $menuItem=$(this)[0].id;
-		console.log("value="+$menuItem);
-		console.log(menu_items);
-		for (var i=0;i<menu_items.length;i++)
+		var menuItem=$(this)[0].id;
+		console.log("value="+menuItem);
+		console.log(menuItems);
+		for (var i=0;i<menuItems.length;i++)
 		{
-			if(menu_items[i].title===$menuItem)
+			if(menuItems[i].title===menuItem)
 			{
 				
-				viewContent(menu_items[i].method);
+				viewContent(menuItems[i].method);
 			
 				break;
 			}

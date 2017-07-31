@@ -122,7 +122,7 @@ class Fattura_model extends CI_Model
 	private function calcola_numero_fattura($numeroFattura)
 	//calcola numero progressivo della nuova fattura
 	{
-		$numero=1;
+
 		$anno=substr($numeroFattura,1,2);
 		$numero=intval(substr($numeroFattura,4));
 		$annoCorrente=date("y",time());
@@ -184,7 +184,7 @@ class Fattura_model extends CI_Model
 			$this->db->insert(TABLE_DETTAGLIO_FATTURA,$dettaglio_fattura);
 			$i++;
 		}
-		
+		return 0;
 
 	}
 	public function insert_data_cliente($data)
