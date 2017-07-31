@@ -149,14 +149,12 @@ class Fattura_model extends CI_Model
 			COL_FATTURA_IRPEF=>$data['fattura_irpef'],
 			COL_FATTURA_ENPAPI=>$data['fattura_enpapi'],
 			COL_FATTURA_NUMERO=>$data['fattura_numero'],
-			//COL_FATTURA_DATA=>date_format($data['fattura_data'],"yyyy/dd/mm"),
 			COL_FATTURA_DATA=>"",
 			COL_FATTURA_PAGATO=>1,
 			COL_FATTURA_IVA=>$data['fattura_iva'],
 			COL_FATTURA_USER_ID=>$data['user_id'],
 			COL_FATTURA_IRPEF_SINO=>$data['fattura_irpef_sino']
 		);
-		//$date=DateTime::createFromFormat("j/mm/Y","31/12/2017");
 		$date = DateTime::createFromFormat('d/m/Y', $data['fattura_data']);
 		$nuova_fattura[COL_FATTURA_DATA]=$date->format("Y/m/d");
 		

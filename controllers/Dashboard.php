@@ -167,7 +167,7 @@ class Dashboard extends CI_Controller {
 	}
 
     /**
-     *
+     *todo: dopo inserimento della fattura nel db, mostra nuova form per inserimento di una nuova fattura
      */
     public function add_fattura()
 	{
@@ -272,4 +272,4 @@ class Dashboard extends CI_Controller {
 
 
 }
-?>
+

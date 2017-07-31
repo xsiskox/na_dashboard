@@ -9,24 +9,10 @@ class Nuova_fattura extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('wpusers');
 	}
-	public function index()
-	{
-		if(is_user_logged_in())
-		{
-			$data['user']=wp_get_current_user();
-			$this->load->model('Fattura_model','model');
-			$data['numeroFattura']=$this->model->numero_fattura($data['user']->ID);
-			$data['elencoClienti']=$this->model->elenco_clienti($data['user']->ID);
-			$this->load->view('nuova_fattura',$data);
-		}
-		else
-		{
-			echo 'login';
-		}
-	}
+
 	public function add_fattura()
 	{
-		
+
 		$this->load->model('Fattura_model','model');
 		$fattura=array
 		(
@@ -39,11 +25,11 @@ class Nuova_fattura extends CI_Controller {
 			'fattura_iva'=>$this->input->post('formIva'),
 			'user_id'=>$this->input->post('userID'),
 			'fattura_irpef_sino'=>(!($this->input->post('formCheckIrpef'))?0:1)
-			
+
 		);
-		
-	
-		
+
+
+
 		$dettaglio_fattura=array
 		(
 			'fattura_id'=>0,
@@ -55,4 +41,22 @@ class Nuova_fattura extends CI_Controller {
 		$this->model->insert_data($fattura,$dettaglio_fattura);
 		$this->index();
 	}
+
+	public function index()
+	{
+		if(is_user_logged_in())
+		{
+			$data['user']=wp_get_current_user();
+			$this->load->model('Fattura_model','model');
+			$data['numeroFattura']=$this->model->numero_fattura($data['user']->ID);
+			$data['elencoClienti']=$this->model->elenco_clienti($data['user']->ID);
+			$this->load->view('nuova_fattura',$data);
+		}
+		else
+		{
+            /*-- open login form --*/
+            redirect("/wp-login.php");
+		}
+	}
 }
+
