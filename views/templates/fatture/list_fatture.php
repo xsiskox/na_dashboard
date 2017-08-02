@@ -3,12 +3,13 @@
 				<div class="container-fluid">
 					<div class='row'>
 						<div class='col-lg-3'> <label>anno</label> <select class="form-control" id='optionAnno' onchange='refresh();'>
-										<option>tutti</option>
+
 										<?php
 											foreach($anni_list as $row){
 												echo"<option>".$row['anno']."</option>";
 											}
 										?>
+                                         <option>tutti</option>
 									</select> </div>
 						<div class='col-lg-3'> <label>Cliente</label> <select class="form-control" id='optionCliente' onchange='refresh();'>
 										<option>tutti</option>
@@ -56,7 +57,7 @@
 					<!-- /panel -->
 					<div id="popup-form">
 						<div class='panel panel-info'>
-							<div><input type='button' class='btn btn-danger' onclick='closePopup(event);' value='X chiudi'></div>
+							<div><input type='button' class='btn btn-danger' onclick='closePopup();' value='X chiudi'></div>
 							<div class='panel-heading'></div>
 							<div id='slide'>
 								<div class='table-responsive'>

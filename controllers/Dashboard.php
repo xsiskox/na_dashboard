@@ -42,8 +42,9 @@ class Dashboard extends CI_Controller {
 	}
 	public function elenco_fatture()
 	{
-		
-		if(is_user_logged_in()){$this->load_view('','','tutti','tutti');}
+		$anno=getdate();
+		$anno=$anno['year'];
+		if(is_user_logged_in()){$this->load_view('',$anno,'tutti','tutti');}
 		else{redirect('/wp-login.php');}
 	}
 	public function refresh_view()
@@ -186,8 +187,9 @@ class Dashboard extends CI_Controller {
 				'fattura_pagato'=>0,
 				'fattura_iva'=>$this->input->post('formIva'),
 				'user_id'=>$userId->ID,
-				'fattura_irpef_sino'=>(!($this->input->post('formCheckIrpef'))?0:1)
-				
+				'fattura_irpef_sino'=>(!($this->input->post('formCheckIrpef'))?0:1),
+				'fattura_enpapi_sino'=>(!($this->input->post('formCheckEnpapi'))?0:1),
+                'fattura_iva_sino'=>(!($this->input->post('formCheckIva'))?0:1)
 			);
 			
 		
@@ -204,7 +206,7 @@ class Dashboard extends CI_Controller {
 			//$view['myHTML']= $this->load->view('templates/fatture/nuova_fattura','',true);
 			
 			//$this->load->view('dashboard_view');TODO: remove this line
-			echo "ok";
+			echo "nuova_fattura";
 		}
 		else
 		{
@@ -212,7 +214,7 @@ class Dashboard extends CI_Controller {
 		}
 	}
 	public function add_cliente()
-	{
+	{//todo: completare funzione
 		if(is_user_logged_in())
 		{
 			$this->load->model('Fattura_model','model');
@@ -239,7 +241,7 @@ class Dashboard extends CI_Controller {
 			//$view['myHTML']= $this->load->view('templates/fatture/nuova_fattura','',true);
 			
 			//$this->load->view('dashboard_view');
-			echo "ok";
+			echo "nuovo_cliente";
 		}
 		else
 		{

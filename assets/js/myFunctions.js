@@ -42,8 +42,11 @@ function viewContent(method)
 	switch(method)
 	{
 		case 'elenco_fatture':
-			var anno = $('#optionAnno').val();
-			param={'anno':anno};
+			// var element=$('#optionAnno');
+			// value=element.find('option:eq("2")').val();
+			// element.val(value).change();
+			// var anno = value;
+			// param={'anno':anno};
 			break;
 	}
 	$.ajax(
@@ -289,16 +292,16 @@ function invoicePDF(fattura)
 	var w = 50;
 	var prestazione="Compenso per prestazioni Infermieristiche (assistenza generale)";
 	var imponibile="imponibile € ";
-	var irpef="Ritenuta IRPEF (20%) € ";
-	var enpapi="Contributo ENPAPI (4%) € ";
+	var irpef="Ritenuta IRPEF ("+fattura.data[0].fattura_irpef+"%) € ";
+	var enpapi="Contributo ENPAPI ("+fattura.data[0].fattura_enpapi+"%) € ";
 	var netto="netto fattura € ";
-	var iva="iva(22%) € ";
+	var iva="iva("+fattura.data[0].fattura_iva+"%) € ";
 	var pagare="totale fattura € ";
 	var footerText="A partire dal 1° gennaio 2012 in ottemperanza alle previsioni di cui alla legge 12 luglio 2011, n.133 gdgdfgs gdsgfdg gdgfgs g dgg gd gfgfdg sf g " +
 		"fdsfdfasdfsdafsdfsdfsdsdfsaf fdsd fds fdsfsdf sfdsf f dsf dsf sdfd fdsf fsdfd fs dfsdf" +
 		"fdsfdfsfsfs dfdg fg gt gdfsgg f hdgh sf";
 	fattura.intestazione="studio associato pinco pallino";
-	fattura.piva="22";
+	fattura.piva="4545etrte43te22";
 	fattura.indirizzo="via della pace";
 	fattura.tel="56789555";
 	doc.text(x, y,fattura.intestazione);
@@ -333,23 +336,21 @@ function invoicePDF(fattura)
 	x = startX;
 	doc.text(x, y, prestazione);
 	y += offset * 2;
-	num=Number(fattura.data[0].lordo);
-	doc.text(x, y, imponibile +num.toFixed(2));
+
+	doc.text(x, y, imponibile +fattura.data[0].lordo);
 	y += offset;
-	num=Number(fattura.data[0].irpef);
-	doc.text(x, y, irpef +num.toFixed(2));
+	doc.text(x, y, irpef + fattura.data[0].irpef);
 	y += offset;
-	num=Number(fattura.data[0].enpapi);
-	doc.text(x, y, enpapi + num.toFixed(2));
+	doc.text(x, y, enpapi + fattura.data[0].enpapi);
 	y += offset;
-	num=Number(fattura.netto);
-	doc.text(x, y, netto + num.toFixed(2));
+	doc.text(x, y, netto +fattura.netto);
 	
 	//stampa label iva se >0
-	if (fattura.iva>0){y += offset;doc.text(x, y, iva + fattura.iva.toFixed(2));}
-	y += offset
-	fattura.pagare=0;
-	doc.text(x, y, pagare + fattura.pagare.toFixed(2));
+	if (fattura.data[0].iva>0){y += offset;doc.text(x, y, iva + fattura.data[0].iva);}
+	if(fattura.data[0].non_imponibile>0){y+=offset;doc.text(x,y,"non imponibile € "+fattura.data[0].non_imponibile);}
+	y += offset;
+
+	doc.text(x, y, pagare + fattura.pagare);
 	y = footerY;
 	doc.line(x, y, x + 100, y);
 	y += offset;
@@ -372,13 +373,22 @@ function btnInvoiceDownload(e,index)
 				success:function(data)
 				{
 					var dati = JSON.parse(data);
-					/*dati.imponibile=3244234.565;
-					dati.irpef=454543.67756;
-					dati.enpapi=123454.5555;
-					dati.nonImponibile=112323.567;
-					dati.netto = dati.imponibile - dati.irpef;
-					dati.totale = dati.netto + dati.enpapi;
-					dati.pagare = dati.totale + dati.iva + dati.nonImponibile;*/
+					var lordo=Number(dati.data[0].lordo);
+					var irpef=Number(dati.data[0].irpef);
+					var enpapi=Number(dati.data[0].enpapi);
+					var netto=(lordo-irpef);
+					var nonImponibile=Number(dati.data[0].non_imponibile);
+					nonImponibile=Number((nonImponibile !== 'NaN' ? nonImponibile : 0));
+					var iva=Number(dati.data[0].iva);
+					iva=Number((iva!=='NaN'?iva:0));
+					dati.data[0].non_imponibile= nonImponibile.toFixed(2);
+					var pagare=netto+enpapi+nonImponibile+iva;
+					dati.netto=netto.toFixed(2);
+					dati.pagare=pagare.toFixed(2);
+					dati.data[0].irpef=irpef.toFixed(2);
+					dati.data[0].lordo=lordo.toFixed(2);
+					dati.data[0].enpapi=enpapi.toFixed(2);
+					dati.data[0].iva=iva.toFixed(2);
 					console.log(dati);
 					invoicePDF(dati);
 				}
@@ -443,7 +453,7 @@ $(document).ready(function()
 				{
 					console.log(result);
 					console.log(btn);
-					viewContent(btn);
+					viewContent(result);
 				}
 			});
 		}

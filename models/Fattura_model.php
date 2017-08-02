@@ -40,6 +40,7 @@ class Fattura_model extends CI_Model
 		define('COL_FATTURA_USER_ID','user_id');
 		define('COL_FATTURA_ENPAPI_SINO','fattura_enpapi_sino');
 		define('COL_FATTURA_IRPEF_SINO','fattura_acconto_irpef_sino');
+		define('COL_FATTURA_IVA_SINO', 'fattura_iva_sino');
 		//*************** TABLE na_clienti ***************
 		define('TABLE_CLIENTI','na_clienti');
 		define('COL_CLIENTE_ID','id');
@@ -142,7 +143,8 @@ class Fattura_model extends CI_Model
 	}
 	public function insert_data($data,$details)
 	{
-		//inserisci nuova fattura nella tabella 'nib_fatture'
+
+		//inserisci nuova fattura nella tabella 'na_fatture'
 		$nuova_fattura=array
 		(
 			COL_FATTURA_CLIENTE=>$data['cliente_id'],
@@ -150,10 +152,12 @@ class Fattura_model extends CI_Model
 			COL_FATTURA_ENPAPI=>$data['fattura_enpapi'],
 			COL_FATTURA_NUMERO=>$data['fattura_numero'],
 			COL_FATTURA_DATA=>"",
-			COL_FATTURA_PAGATO=>1,
+			COL_FATTURA_PAGATO=>0,
 			COL_FATTURA_IVA=>$data['fattura_iva'],
 			COL_FATTURA_USER_ID=>$data['user_id'],
-			COL_FATTURA_IRPEF_SINO=>$data['fattura_irpef_sino']
+			COL_FATTURA_IRPEF_SINO=>$data['fattura_irpef_sino'],
+            COL_FATTURA_ENPAPI_SINO=>$data['fattura_enpapi_sino'],
+            COL_FATTURA_IVA_SINO=>$data['fattura_iva_sino']
 		);
 		$date = DateTime::createFromFormat('d/m/Y', $data['fattura_data']);
 		$nuova_fattura[COL_FATTURA_DATA]=$date->format("Y/m/d");

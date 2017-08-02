@@ -1,4 +1,6 @@
+
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Na_cv  //classe per gestire il curriculum vitae
@@ -163,3 +165,4 @@ class Na_cv  //classe per gestire il curriculum vitae
 	}
 }
 ?>
+

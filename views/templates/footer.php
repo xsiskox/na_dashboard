@@ -16,7 +16,7 @@
 		<!---------------------- price format library -------------------------->
 		<script src="assets/dist/js/jquery.priceformat.min.js"></script>
 		<!---------------------- my functions javasript file -------------------------->
-		<script src="assets/dist/js/myFunctions.js"></script>
+		<script src="application/assets/js/myFunctions.js"></script>
 		<!---------------------- jquery user interface library -------------------------->
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<!---------------------- datapicker bootstrap js -------------------------->

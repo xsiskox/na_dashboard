@@ -102,6 +102,7 @@
 		</dl>
 		<div class="row">
 			<div class="col-sm-12">
+<!--                button id='metodo da chiamare'-->
 				<div> <button type="submit" name="submitForm" class="btn btn-success btn-lg btn-block" id="add_fattura" disabled="disabled"><span class="glyphicon glyphicon-ok glyphicon-btn-submit" aria-hidden="true"> salva</span></button> </div>
 			</div>
 		</div>
