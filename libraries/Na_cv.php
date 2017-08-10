@@ -1,4 +1,3 @@
-
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -24,7 +23,7 @@ class Na_cv  //classe per gestire il curriculum vitae
 	
 	//************************** metakey utilizzate nel db************************************
 	//meta_key sezione informazioni personali
-	private $meta_key_ip=[self::PREFIX_IP.'_name'=>'nome',self::PREFIX_IP.'_address'=>'_indirizzo',self::PREFIX_IP.'_tel'=>'telefono',self::PREFIX_IP.'_mail'=>'mail',self::PREFIX_IP.'_www'=>'www'];
+	private $meta_key_ip=[self::PREFIX_IP.'_name'=>'nome',self::PREFIX_IP.'_address'=>'indirizzo',self::PREFIX_IP.'_tel'=>'telefono',self::PREFIX_IP.'_mail'=>'mail',self::PREFIX_IP.'_www'=>'www'];
 	//meta_key sezione capacita personali
 	private $meta_key_cp=[self::PREFIX_CP.'_c_comunicative'=>'capacita comunicativa',self::PREFIX_CP.'_c_org'=>'capacita organizzative',self::PREFIX_CP.'_c_professionali'=>'competenze professionali',
 													self::PREFIX_CP.'_c_digit'=>'competenze digitali',self::PREFIX_CP.'_altro'=>'altre competenze',self::PREFIX_CP.'_patente'=>'patente guida'];
@@ -164,5 +163,5 @@ class Na_cv  //classe per gestire il curriculum vitae
 		return $this->meta_key_if;   
 	}
 }
-?>
+
 

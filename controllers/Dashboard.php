@@ -42,9 +42,8 @@ class Dashboard extends CI_Controller {
 	}
 	public function elenco_fatture()
 	{
-		$anno=getdate();
-		$anno=$anno['year'];
-		if(is_user_logged_in()){$this->load_view('',$anno,'tutti','tutti');}
+
+		if(is_user_logged_in()){$this->load_view('','','','');}
 		else{redirect('/wp-login.php');}
 	}
 	public function refresh_view()
@@ -106,20 +105,27 @@ class Dashboard extends CI_Controller {
 			return $data;
 
 	}
-	private function load_view($mess,$anno,$cust,$stat)
+
+    /**
+     * mostra l'elenco fatture emesse dall'user.
+     * @param $mess='refresh' reload elenco fatture
+     * @param $anno filtro elenco
+     * @param $cust filtro elenco
+     * @param $stat filtro elenco
+     */
+    private function load_view($mess, $anno, $cust, $stat)
 	{
 		
 		$user=wp_get_current_user();
 		if($user->ID>0)
 		{
 			$this->load->model('Fattura_model','model');
-			//$anno="tutti";
-			$cliente=$cust;
-			$pagato=$stat;
-			$data['list']=$this->model->get_fatture_list($user->ID,$anno,$cliente,$pagato);
+
+
 			switch($mess)
 			{
 				case 'refresh':
+                    $data['list']=$this->model->get_fatture_list($user->ID,$anno,$cust,$stat);
 					echo $this->load->view('templates/fatture/list',$data,true);
 					break;
 				default:

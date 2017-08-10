@@ -48,7 +48,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php	$this->load->view('templates/fatture/list');?>
+
 								</tbody>
 							</table>
 						</div>
@@ -77,4 +77,11 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
+        <script>
+	        $(document).ready(function()
+	        {
+		        refresh();
+			        });
+        </script>

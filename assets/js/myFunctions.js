@@ -1,4 +1,5 @@
-
+/*todo: da elenco fatture invio mail
+* todo: creare diversi modelli di fattura*/
 function closePopup()
 {/*-- chiude la finestra dettagli fattura nella vista elenco fatture --*/
 	
@@ -39,24 +40,16 @@ function viewContent(method)
 {
 	var url = "?/dashboard/"+method+"/";
 	var param={'msg':''};
-	switch(method)
-	{
-		case 'elenco_fatture':
-			// var element=$('#optionAnno');
-			// value=element.find('option:eq("2")').val();
-			// element.val(value).change();
-			// var anno = value;
-			// param={'anno':anno};
-			break;
-	}
 	$.ajax(
 		{
 			type: 'post',
 			url: url,
 			data:param,
-			success: function (data) {$('#page-wrapper').html(data);}
+			success: function (data) {$('#page-wrapper').html(data);
+			}
 		}
 	);
+
 }
 
 function refresh()
@@ -148,11 +141,20 @@ function formatNumeral(index)
 	var prezzo=document.getElementById("pu"+index);
 	prezzo.value=numeral(prezzo.value).format('0.00');
 }
-function calculate(index)
+var totale_riga=function(index){
+	var input_qta=document.getElementById("qta" + index);
+	var input_prezzo=document.getElementById("pu" + index);
+	var qta =Number(input_qta.value);
+	var prezzo =Number(input_prezzo.value);
+	document.getElementById("tot" + index).value = (prezzo * qta).toFixed(2);
+	input_qta.value=qta.toFixed(2);
+	input_prezzo.value=prezzo.toFixed(2);
+
+};
+
+function calculate(i)
 {
-	var qta = document.getElementById("qta" + index).value;
-	var prezzo = document.getElementById("pu" + index).value;
-	document.getElementById("tot" + index).value = numeral(prezzo * qta).format('0.00');
+	totale_riga(i);
 	showTotale();
 	checkFieldForm();
 }
@@ -338,10 +340,14 @@ function invoicePDF(fattura)
 	y += offset * 2;
 
 	doc.text(x, y, imponibile +fattura.data[0].lordo);
-	y += offset;
-	doc.text(x, y, irpef + fattura.data[0].irpef);
-	y += offset;
-	doc.text(x, y, enpapi + fattura.data[0].enpapi);
+	if (fattura.data[0].irpef>0) {
+		y += offset;
+		doc.text(x, y, irpef + fattura.data[0].irpef);
+	}
+	if (fattura.data[0].enpapi>0) {
+		y += offset;
+		doc.text(x, y, enpapi + fattura.data[0].enpapi);
+	}
 	y += offset;
 	doc.text(x, y, netto +fattura.netto);
 	
@@ -359,11 +365,11 @@ function invoicePDF(fattura)
 	y += offset;
 	doc.setFontStyle("normal");
 	doc.text(x, y, "(1)"+footerText);
-	doc.save("hello js.pdf");
+	doc.save(fattura.data[0].fattura_numero+"_"+(fattura.cliente[0].cliente_nome).replace(/ /g,'')+".pdf");
 }
 function btnInvoiceDownload(e,index)
 	{
-		//todo: calcolare i campi lordo
+
 		var tableRow = document.getElementById("elencoFatture").rows[index];
 		var id = tableRow.cells[0].innerHTML;
 		e.stopPropagation();
@@ -389,7 +395,7 @@ function btnInvoiceDownload(e,index)
 					dati.data[0].lordo=lordo.toFixed(2);
 					dati.data[0].enpapi=enpapi.toFixed(2);
 					dati.data[0].iva=iva.toFixed(2);
-					console.log(dati);
+					console.log(dati);//todo: delete this
 					invoicePDF(dati);
 				}
 			});
