@@ -19,7 +19,10 @@ class Na_cv  //classe per gestire il curriculum vitae
 	const PREFIX_CP='cp';
 	const PREFIX_PR='pr';
 	const PREFIX_EP='ep';
-	
+	//*********************************icons metakey****************************************
+    private $icons=['ip_name'=>'','ip_address'=>'glyphicon-map-marker',
+        'ip_tel'=>'glyphicon-phone','ip_mail'=>'glyphicon-envelope',
+        'ip_www'=>'glyphicon-globe'];
 	
 	//************************** metakey utilizzate nel db************************************
 	//meta_key sezione informazioni personali
@@ -33,14 +36,14 @@ class Na_cv  //classe per gestire il curriculum vitae
 	//meta_key sezione esperienza professionale
 	private $meta_key_ep=[self::PREFIX_CP.'_data_range'=>'data',self::PREFIX_CP.'_occupazione'=>'occupazione',self::PREFIX_CP.'_sede'=>'sede',self::PREFIX_CP.'_ruolo'=>'ruolo'];
 	//************************** array sezioni cv ************************************
-  private $sections=array();//sezioni del cv
-	public $informazioni_personali=array(); //sezione informazioni personali
-  private $esperienza_professionale=array(); //sezione esperienza professionale
-	public $istruzione_formazione=array();// sezione istruzione e formazione
-	private $competenze_personali=array();
-	private $posizione_richiesta=''; //posizione richiesta
-	private $allegati=array(); //elenco allegati
-	private $altre_info=array(); //informazioni aggiuntive
+    private $sections=array();//sezioni del cv
+    public $informazioni_personali=array(); //sezione informazioni personali
+    private $esperienza_professionale=array(); //sezione esperienza professionale
+    public $istruzione_formazione=array();// sezione istruzione e formazione
+    private $competenze_personali=array();
+    private $posizione_richiesta=''; //posizione richiesta
+    private $allegati=array(); //elenco allegati
+    private $altre_info=array(); //informazioni aggiuntive
 	//*********************************************************************************
 	public function __construct()
 	{
@@ -161,6 +164,11 @@ class Na_cv  //classe per gestire il curriculum vitae
 	public function get_metakey_if()
 	{
 		return $this->meta_key_if;   
+	}
+
+    public function get_icons()
+    {
+        return $this->icons;
 	}
 }
 

@@ -29,18 +29,22 @@ foreach($sezioni as $sez)
 	echo'<div class="portlet box '.$portlet_color.'"><div class="portlet-header"><div class="caption">'.$sez.'</div>
 				<div class="actions"><a href="#" class="btn btn-sm btn-white"><i class="fa fa-edit"></i>&nbsp;
         Edit</a>&nbsp;<a href="#" class="btn btn-sm btn-white"><i class="fa fa-user"></i>&nbsp;
-        User</a></div></div><div class="portlet-body"><form role="form" class="form-horizontal form-separated" id="formCV'.$cv_index++.'"><div class="form-body">';
+        User</a></div></div><div class="portlet-body"><dl class="dl-horizontal">';
 				$keys=array_keys($section);
 				foreach($keys as $key)
 				{
-					echo '<div class="form-group form-inline"><label class="col-md-3 control-label">'.$key.'</label>
-								<div class="col-md-9"><input class="form-control mrl" value="'.$section[$key].'" name="'.$meta_key_array[$key].'"/>
-								<span class="text-warning mts help-block-right">Help block on the right</span></div></div>';
-					
+
+                    if ($section[$key]!=='') {
+                        $i = $meta_key_array[$key];
+                        $icon=($icons[$i]!=="")?$icons[$i]:"";
+                        $my_html = "<h4><dd><span class='glyphicon " . $icon . "' aria-hidden='true'> " . $section[$key] . "</span></dd></h4>";
+                        echo $my_html;
+                    }
+
 				}
 
-    echo '</div></form><div id="cv_update" name="submitForm" class="btn btn-success btn-lg btn-block">Fatto</div></div></div>';
-				
+    echo '</dl></div></div>';
+
 
 }
 ?>

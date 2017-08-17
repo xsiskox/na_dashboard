@@ -261,7 +261,7 @@ class Dashboard extends CI_Controller {
 			$this->load->model('cv_model','model');
 			$result=$this->model->get_sections();
 			if(isset($result)){$this->na_cv->set_sections($result);}
-			echo $this->load->view('templates/cv/cv','',true);
+			echo $this->load->view('templates/cv/cv_edit','',true);
 			
 		}
 		else
@@ -271,9 +271,18 @@ class Dashboard extends CI_Controller {
 	}
 	function cv_update()
 	{
-		$this->load->model('cv_model','model');
-		$post=$this->input->post();
-		$this->model->update($post,$this->na_cv->get_cv_id());
+        if (is_user_logged_in())
+        {
+            $this->load->model('cv_model','model');
+            $post=$this->input->post();
+            $user=wp_get_current_user();
+            $this->model->update($post,$user->ID);
+
+        }
+        else {
+            redirect('/wp-login.php');
+        }
+
 		
 		
 	}

@@ -65,10 +65,10 @@ class Cv_model extends CI_Model
 		}
 		
 	}
-	public function update($data,$id)
+	public function update($data,$user_id)
 	{
-		$user=wp_get_current_user();
-		$query=$this->db->query('select * from '.TABLE_CV.' where '.COL_NACV_USERID.'='.$user->ID);
+
+		$query=$this->db->query('select * from '.TABLE_CV.' where '.COL_NACV_USERID.'='.$user_id);
 		$row=$query->row();
 		
 		if(isset($row))
