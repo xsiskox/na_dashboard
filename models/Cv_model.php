@@ -81,7 +81,7 @@ class Cv_model extends CI_Model
 				$this->db->where(COL_CVMETA_ID,$row->id);
 				$this->db->where(COL_CVMETA_KEY,$key);
 				$this->db->update(TABLE_NACV_META,$insert_data);
-				echo $this->db->last_query();
+				//echo $this->db->last_query();
 			}
 			
 		}
@@ -102,6 +102,7 @@ class Cv_model extends CI_Model
 			}
 			
 		}
+        return 0;
 	}
 	
 }

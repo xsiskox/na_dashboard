@@ -442,7 +442,7 @@ $(document).ready(function()
 	});
 	$(document).on("click","[name='submitForm']",function()
 	{// post forms input
-		console.log($(this)+'	'+document.forms);
+		console.log($(this)+'	'+document.forms);//todo remove
 		var btn=$(this)[0].id;
 		if (document.forms.length>0)
 		{
@@ -453,7 +453,7 @@ $(document).ready(function()
 			console.log(forms+'	'+document.forms[0].id);
 			$.ajax({
 				type:'post',
-				url:"?/dashboard/"+$(this)[0].id+"/",
+				url:"?/dashboard/"+btn+"/",
 				data:$(forms).serialize(),
 				success:function(result)
 				{

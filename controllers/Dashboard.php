@@ -261,7 +261,7 @@ class Dashboard extends CI_Controller {
 			$this->load->model('cv_model','model');
 			$result=$this->model->get_sections();
 			if(isset($result)){$this->na_cv->set_sections($result);}
-			echo $this->load->view('templates/cv/cv_edit','',true);
+			echo $this->load->view('templates/cv/cv','',true);
 			
 		}
 		else
@@ -269,6 +269,21 @@ class Dashboard extends CI_Controller {
 			redirect('/wp-login.php');
 		}
 	}
+	function edit_cv()
+    {
+        if(is_user_logged_in())
+        {
+            $this->load->model('cv_model','model');
+            $result=$this->model->get_sections();
+            if(isset($result)){$this->na_cv->set_sections($result);}
+            echo $this->load->view('templates/cv/cv_edit','',true);
+
+        }
+        else
+        {
+            redirect('/wp-login.php');
+        }
+    }
 	function cv_update()
 	{
         if (is_user_logged_in())
@@ -277,7 +292,7 @@ class Dashboard extends CI_Controller {
             $post=$this->input->post();
             $user=wp_get_current_user();
             $this->model->update($post,$user->ID);
-
+            echo "view_cv";
         }
         else {
             redirect('/wp-login.php');
