@@ -45,7 +45,7 @@ foreach($sezioni as $sez)
                             $icon = ($icons[$i] !== "") ? $icons[$i] : "";
                         }
                         else{$icon="";}
-                        $my_html = "<dt>{$key}   <span class='glyphicon $icon' aria-hidden='true'></span></dt><dd>{$section[$key]}</dd>
+                        $my_html = "<dt>{$key}   <span class='fa $icon' aria-hidden='true'></span></dt><dd>{$section[$key]}</dd>
 <br>";
                         echo $my_html;
                     }

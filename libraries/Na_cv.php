@@ -20,9 +20,9 @@ class Na_cv  //classe per gestire il curriculum vitae
 	const PREFIX_PR='pr';
 	const PREFIX_EP='ep';
 	//*********************************icons metakey****************************************
-    private $icons=['ip_name'=>'','ip_address'=>'glyphicon-map-marker',
-        'ip_tel'=>'glyphicon-phone','ip_mail'=>'glyphicon-envelope',
-        'ip_www'=>'glyphicon-globe'];
+    private $icons=['ip_name'=>'fa-user','ip_address'=>'fa-map-marker',
+        'ip_tel'=>'fa-phone','ip_mail'=>'fa-envelope',
+        'ip_www'=>'fa-globe'];
 	
 	//************************** metakey utilizzate nel db************************************
 	//meta_key sezione informazioni personali

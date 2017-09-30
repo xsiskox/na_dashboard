@@ -87,7 +87,7 @@ class Cv_model extends CI_Model
 		}
 		else
 		{
-			if(! $this->db->insert(TABLE_CV,[COL_NACV_USERID=>$user->ID]))
+			if(! $this->db->insert(TABLE_CV,[COL_NACV_USERID=>$user_id]))
 			{
 				return 'errore';
 			}

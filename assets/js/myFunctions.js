@@ -38,14 +38,19 @@ function showTableDettagli(table) {/*-- mostra la finestra pop-up dettagli fattu
 }
 function viewContent(method)
 {
+	var e=$('#page-wrapper');
 	var url = "?/dashboard/"+method+"/";
 	var param={'msg':''};
+
 	$.ajax(
 		{
 			type: 'post',
 			url: url,
 			data:param,
-			success: function (data) {$('#page-wrapper').html(data);
+			success: function (data)
+			{
+				e.html(data);
+
 			}
 		}
 	);
@@ -423,6 +428,7 @@ $(document).ready(function()
 	});
 	$(document).on("click", "[name='menuButton']", function()
 	{
+
 		console.log($(this));
 		var menuItem=$(this)[0].id;
 		console.log("value="+menuItem);
