@@ -1,4 +1,8 @@
 <?php
+/**
+ * classe principale
+ * @param1 parametro 1
+ */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller {
@@ -14,7 +18,10 @@ class Dashboard extends CI_Controller {
 		
 	}
 
-	public function index()
+    /**
+     *
+     */
+    public function index()
 	{
 		if(is_user_logged_in())
 		{
@@ -79,12 +86,16 @@ class Dashboard extends CI_Controller {
 			redirect('/wp-login.php');
 		}
 	}
-	public function set_invoice_pdf($id_fattura)
+
+    /**
+     * @param $id_fattura
+     */
+    public function set_invoice_pdf($id_fattura)
 	{
 		//load dati fattura (data, numero,irpef%,...)
 		$this->load->model('Fattura_model','model');
 		$data['data']=$this->model->get_fattura_data($id_fattura);
-		//load dettagli fattura
+		//load deCuld1945@teleworm.usttagli fattura
 		$data['dettaglio']=$this->model->get_dettagli_fattura($id_fattura);
 		//load dati cliente todo: add code to load customer data
 		$id_cliente=$data['data'][0]['cliente_id'];
@@ -157,7 +168,11 @@ class Dashboard extends CI_Controller {
 			redirect('/wp-login.php');
 		}
 	}
-	public function nuova_fattura()
+
+    /**
+     *
+     */
+    public function nuova_fattura()
 	{
 		if(is_user_logged_in())
 		{
