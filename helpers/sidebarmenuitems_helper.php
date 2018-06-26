@@ -13,7 +13,14 @@ if ( ! function_exists('menu_items'))
 	/**
 	 * Menu Items
 	 *
-	 * menu di navigazione della dashboard
+	 * menu di navigazione della dashboard: per aggiungere un elemento alla navbar
+     * inserire nella'array $menu i seguenti indici:
+     * title titolo visualizzato nella navbar
+     * method il metodo chiamato in Dashboard.php
+     * ddm 0 menu radice 1 submenu
+     * parent title del menu radice. null se menu radice
+     * icon fa-icon
+     * order ordinamento (1 sopra)
 	 *
 	 * return array
 	 * 
