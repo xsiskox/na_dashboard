@@ -20,7 +20,7 @@ if ( ! function_exists('menu_items'))
      * ddm 0 menu radice 1 submenu
      * parent title del menu radice. null se menu radice
      * icon fa-icon
-     * order ordinamento (1 sopra)
+     * order ordinamento (1 sopra)))
 	 *
 	 * return array
 	 * 
